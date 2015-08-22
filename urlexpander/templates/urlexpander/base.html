@@ -1,0 +1,37 @@
+
+{% load staticfiles %}
+<html>
+<head>
+    <title>Morya's Blog</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+</head>
+<body>
+<div class="page-header">
+        {% if user.is_authenticated %}
+        <a class="top-menu" href="{% url "url_new" %}">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        <p class="top-menu">
+            Hello {{ user.username }}<small>(<a href="{% url "django.contrib.auth.views.logout" %}">Log out</a>)</small>
+        </p>
+        {% else %}
+        <a href="{% url "django.contrib.auth.views.login" %}" class="top-menu">
+            <span class="glyphicon glyphicon-lock"></span>
+        </a>
+        {% endif %}
+    <h1><a href="{% url "urls_list" %}">Morya's Blog</a></h1>
+</div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

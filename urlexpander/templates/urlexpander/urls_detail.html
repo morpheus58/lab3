@@ -1,0 +1,12 @@
+{% extends "urlexpander/base.html" %}
+
+{% block content %}
+<div class="post">
+    <a class="btn btn-default" href="{% url "url_edit" pk=expandedurl.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn btn-default" href="{% url "url_remove" pk=expandedurl.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+    <h1>{{ expandedurl.page_title }}</h1>
+    <p>{{ expandedurl.destination_url }}</p>
+    <p>{{ expandedurl.short_url }}</p>
+    <p>{{ expandedurl.http_status_code }}</p>
+</div>
+{% endblock %}

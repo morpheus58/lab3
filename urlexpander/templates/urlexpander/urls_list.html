@@ -1,0 +1,20 @@
+{% extends "urlexpander/base.html" %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Morya's UrlExpander</title>
+</head>
+<body>
+    {% block content %}
+    <h1>Love It</h1>
+    {% for expandedurl in expandedurls %}
+    <div class="post">
+        <h1><a href="{% url "urls_detail" pk=expandedurl.pk %}">{{ expandedurl.page_title }}</a></h1>
+        <p>destination url: {{ expandedurl.destination_url }}</p>
+        <p>short url: {{ expandedurl.short_url}}</p>
+        <p>http_status_code: {{ expandedurl.http_status_code }}</p>
+    </div>
+    {% endfor %}
+    {% endblock content %}
+</body>
+</html>
