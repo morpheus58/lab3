@@ -19,6 +19,11 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/lab1'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/lab3'}),
     url(r'', include('urlexpander.urls')),
+]
+
+urlpatterns += [
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
 ]

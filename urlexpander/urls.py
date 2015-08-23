@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^url/(?P<pk>[0-9]+)/edit/$', views.url_edit, name='url_edit'),
     url(r'^url/(?P<pk>[0-9]+)/remove/$', views.url_remove, name='url_remove'),
     url(r'^urlsapi/$', views.UrlList.as_view()),
-    #url(r'^snippets/(?P<pk>[0-9]+)/$', views.SnippetDetail.as_view()),
+    url(r'^urlsapi/(?P<pk>[0-9]+)/$', views.UrlDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

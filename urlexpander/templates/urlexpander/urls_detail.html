@@ -7,6 +7,7 @@
     <h1>{{ expandedurl.page_title }}</h1>
     <p>{{ expandedurl.destination_url }}</p>
     <p>{{ expandedurl.short_url }}</p>
-    <p>{{ expandedurl.http_status_code }}</p>
+    <p>This tells you what happened when you expanded the url: {{ expandedurl.http_status_code }}</p>
+    <p>Screen Capture Link: {{expandedurl.screen_capture}}</p>
 </div>
 {% endblock %}

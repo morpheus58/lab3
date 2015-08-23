@@ -10,6 +10,7 @@
     {% for expandedurl in expandedurls %}
     <div class="post">
         <h1><a href="{% url "urls_detail" pk=expandedurl.pk %}">{{ expandedurl.page_title }}</a></h1>
+        <a class="btn btn-default" href="{% url "url_remove" pk=expandedurl.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
         <p>destination url: {{ expandedurl.destination_url }}</p>
         <p>short url: {{ expandedurl.short_url}}</p>
         <p>http_status_code: {{ expandedurl.http_status_code }}</p>

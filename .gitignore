@@ -3,3 +3,4 @@ __pycache__
 lab1venv
 settings.py
 ghostdriver.log
+.aws
