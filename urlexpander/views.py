@@ -17,7 +17,7 @@ from rest_framework import permissions
 from ratelimit.decorators import ratelimit
 from rest_framework import generics, mixins
 from ratelimit.mixins import RatelimitMixin
-from rest_framework.reverse import reverse
+
 
 # Create your views here.
 @ratelimit(key='ip', rate='10/m', block=True)
@@ -25,22 +25,29 @@ from rest_framework.reverse import reverse
 def urls_list(request):
     expandedurls = expandedurl.objects.all()
     return render(request, 'urlexpander/urls_list.html', {'expandedurls': expandedurls})
+
 @ratelimit(key='ip', rate='10/m', block=True)
 @login_required(login_url='/lab3/accounts/login')
 def urls_detail(request, pk):
     url = get_object_or_404(expandedurl, pk=pk)
     return render(request, 'urlexpander/urls_detail.html', {'expandedurl': url})
+
 @ratelimit(key='ip', rate='10/m', block=True)
 @login_required(login_url='/lab3/accounts/login')
 def url_new(request):
     if request.method == "POST":
         form=ExpandedUrlForm(request.POST)
         if form.is_valid():
-            url = form.save()
-            return redirect('urlexpander.views.urls_detail', pk=url.pk)
+            serializer = ExpandedUrlSerializer(data=form.data)
+            if serializer.is_valid():
+                url = ExpandedUrlSerializer.create(self=serializer, validated_data=serializer.data)
+                serializer.save()
+                url.save()
+            return redirect('urlexpander.views.urls_detail', pk=url.id)
     else:
         form = ExpandedUrlForm()
         return render(request, 'urlexpander/urls_edit.html', {'form': form})
+
 @ratelimit(key='ip', rate='10/m', block=True)
 @login_required(login_url='/lab3/accounts/login')
 def url_edit(request, pk):
